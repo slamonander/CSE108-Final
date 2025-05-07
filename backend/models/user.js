@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-const validator = require('validator');
+import validator from 'validator';
+//const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
     name:{

@@ -2,8 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js'
 import productRoutes from './routes/product.js'
-// import Product from './models/product.js'
-// import mongoose from 'mongoose';
+import cartRoutes from './routes/cart.js'
+import orderRoutes from './routes/order.js'
+import userRoutes from './routes/user.js'
+
 
 dotenv.config();
 
@@ -12,6 +14,12 @@ const app = express();
 app.use(express.json());  
 
 app.use("/api/products", productRoutes);
+
+app.use("/api/cart", cartRoutes);
+
+app.use("/api/order", cartRoutes);
+
+app.use("/api/user", cartRoutes);
 
 app.get("/", (req, res)=>{
     res.send("Server is ready");
