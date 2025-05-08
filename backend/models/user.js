@@ -31,6 +31,12 @@ const userSchema = new mongoose.Schema({
     registrationInfo:{
         type: Date,
         default: Date.now,
+    },
+    balance:{
+        type: Number,
+        required: true,
+        min: 0,
+        default: 1000,
     }
     
 });

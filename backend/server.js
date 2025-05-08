@@ -17,7 +17,7 @@ app.use("/api/products", productRoutes);
 
 app.use("/api/cart", cartRoutes);
 
-app.use("/api/order", cartRoutes);
+app.use("/api/orders", cartRoutes);
 
 app.use("/api/user", cartRoutes);
 

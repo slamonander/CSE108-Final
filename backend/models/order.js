@@ -39,7 +39,15 @@ const orderSchema =  new mongoose.Schema({
         emum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Canceled'],
         default: 'Pending',
         required: true
-    }
+    },
+    address: {
+        street1: String,
+        street2: String,
+        city: String,
+        state: String,
+        country: String,
+        zip: String,
+      },
 });
 
 const Order = mongoose.model('Order', orderSchema);
