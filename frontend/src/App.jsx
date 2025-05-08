@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import ProductList from './ProductList';
 import HomeImage from './HomeImage';
 import Cart from './Cart';
+import LoginSignUp from './LoginSignUp';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/products" element={<ProductList />} />
         <Route path ="/cart" element={<Cart />} />
+        <Route path ="/login" element={<LoginSignUp />} />
         <Route path ="/" element={<HomeImage />} />
       </Routes>
     </Router>
