@@ -42,15 +42,15 @@ const ProductList = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading products. Spare us a moment.</div>
+        return <div className="text">Loading products. Spare us a moment.</div>
     }
 
     if (error) {
-        return <div>{error}</div>
+        return <div className="text">{error}</div>
     }
 
     if (!products.length) {
-        return <div>Apologies. It seems like we are out of inventory.</div>;
+        return <div className="text">Apologies. It seems like we are out of inventory.</div>;
     }
 
 

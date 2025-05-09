@@ -1,8 +1,19 @@
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
 .productGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
     padding: 1rem;
+    margin: 0;
+    padding: 5%;
   }
   
   .productCard {
