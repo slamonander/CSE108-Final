@@ -7,6 +7,7 @@ import orderRoutes from './routes/order.js'; // Still using cartRoutes here, rem
 import userRoutes from './routes/user.js';   // Still using cartRoutes here, remember to fix if you have userRoutes
 import cors from 'cors'; // Allow requests from frontend
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 
 dotenv.config(); // This should load your .env file
@@ -19,21 +20,24 @@ console.log('PORT:', process.env.PORT);             // And this, if you use it f
 console.log('------------------------------------');
 // --- End Debugging Lines ---
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors()); // To allow fetching requests
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
-app.use("/api/cart", cartRoutes);
-app.use("/api/orders", cartRoutes); // Correct this if it should be orderRoutes
-app.use("/api/user", cartRoutes);   // Correct this if it should be userRoutes
+app.use("/api/cart", cartRoutes); 
+app.use("/api/orders", orderRoutes); // Correct this if it should be orderRoutes
+app.use("/api/user", userRoutes);   // Correct this if it should be userRoutes
 
 // Serve front
 app.use(express.static(path.join(__dirname, 'build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+// });
 
 app.get("/", (req, res) => {
     res.send("Server is ready");
