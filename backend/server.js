@@ -6,8 +6,9 @@ import cartRoutes from './routes/cart.js';
 import orderRoutes from './routes/order.js'; // Still using cartRoutes here, remember to fix if you have orderRoutes
 import userRoutes from './routes/user.js';   // Still using cartRoutes here, remember to fix if you have userRoutes
 import cors from 'cors'; // Allow requests from frontend
+import path from 'path';
 
-app.use(cors()); // To allow fetching requests
+
 dotenv.config(); // This should load your .env file
 
 // --- Debugging Lines ---
@@ -20,12 +21,19 @@ console.log('------------------------------------');
 
 const app = express();
 
+app.use(cors()); // To allow fetching requests
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", cartRoutes); // Correct this if it should be orderRoutes
 app.use("/api/user", cartRoutes);   // Correct this if it should be userRoutes
+
+// Serve front
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 app.get("/", (req, res) => {
     res.send("Server is ready");
