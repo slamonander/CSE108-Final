@@ -35,3 +35,4 @@ app.listen(port, () => {
     connectDB(); // This is where mongoose.connect is called
     console.log(`Server started at http://localhost:${port}`);
 });
+
