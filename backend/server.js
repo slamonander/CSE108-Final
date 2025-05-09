@@ -5,7 +5,9 @@ import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import orderRoutes from './routes/order.js'; // Still using cartRoutes here, remember to fix if you have orderRoutes
 import userRoutes from './routes/user.js';   // Still using cartRoutes here, remember to fix if you have userRoutes
+import cors from 'cors'; // Allow requests from frontend
 
+app.use(cors()); // To allow fetching requests
 dotenv.config(); // This should load your .env file
 
 // --- Debugging Lines ---
