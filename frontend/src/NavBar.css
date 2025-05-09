@@ -8,6 +8,14 @@
 
 .logo {
     font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logoImg {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-right: 10px;
 }
 
 .navLinks {
@@ -19,8 +27,11 @@
 .navLinks a {
     color: black;
     text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .navLinks a:hover {
-    color: rgb(221, 211, 77);
+    color: rgb(193, 183, 48);
+    transform: translateY(-7px);
 }
