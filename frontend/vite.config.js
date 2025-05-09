@@ -1,7 +1,8 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/CSE108-Final/',
   plugins: [react()],
-  root: './', // or set to your `frontend` if you're one folder above
 });
