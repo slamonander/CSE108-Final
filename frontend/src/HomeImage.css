@@ -6,7 +6,6 @@ body {
     font-family: "Tagesschrift", system-ui;
     font-style: normal;
 }
-
 h1 {
     animation: upDownFloat 3s ease-in-out infinite;
 }
