@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For redirection
 import './LoginSignUp.css';
 
-const LoginSignUp = () => {
-    const [isLogin, setIsLogin] = useState(false); // To toggle between Login and Sign Up
+const LoginSignUp = ({setIsAuthenticated}) => {
+    const [isLogin, setIsLogin] = useState(true); // To toggle between Login and Sign Up
     const [formData, setFormData] = useState({
         name: '', // Only for sign up
         username: '', // Only for sign up
@@ -62,6 +62,8 @@ const LoginSignUp = () => {
             if (data.token) {
                 // Store the token (e.g., in localStorage)
                 localStorage.setItem('token', data.token);
+                //set the state authentication variable to true
+                setIsAuthenticated(true);
                 // You might want to store user info in context or Redux
                 if (data.user) {
                     localStorage.setItem('user', JSON.stringify(data.user));

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState }  from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
+    const handleLogout = () =>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsAuthenticated(false);
+        window.location.href = '/login';
+    };
     return (
         <nav className="navBar">
             <img src="https://media.forgecdn.net/avatars/thumbnails/265/180/256/256/637228616324135331.png" className="logoImg"></img><div className="logo">Dabloons</div>
@@ -10,7 +16,7 @@ const NavBar = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/products">Products</Link></li>
                 <li><Link to="/cart">Cart</Link></li>
-                <li><Link to="/login">Login</Link></li>
+                {isAuthenticated ? <li><button onClick={handleLogout}>Logout</button></li> : <li><Link to="/login">Login</Link></li> }
             </ul>
         </nav>
     );

@@ -6,17 +6,22 @@ const Cart = () => {
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    let userId = null;
   
     useEffect(() => {
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(localStorage.getItem("user"));
-      const userId = user.id;
+        const token = localStorage.getItem("token");
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            userId = user.id;
+        } catch (error) {
+            userId = null;
+        }
 
-      if (!userId || !token) {
-        setError("You must be logged in to view your cart.");
-        setLoading(false);
-        return;
-      }
+        if (!userId || !token) {
+            setError("You must be logged in to view your cart.");
+            setLoading(false);
+            return;
+        }
 
       
       axios
