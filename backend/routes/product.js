@@ -4,6 +4,25 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
+router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: "Unable to find product."});
+    }
+
+    try {
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({ success: false, message: "Unable to find product"});
+        }
+        res.status(200).json({ success: true, data: product});
+    } catch (error) {
+        console.log("Unable to fetch product:", error.message);
+        res.status(500).json({ success: false, message: "Server error"});
+    }
+});
+
 router.get("/", async (req, res) =>{
     try {
         const products = await Product.find({});
