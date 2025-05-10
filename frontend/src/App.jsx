@@ -5,6 +5,7 @@ import ProductList from './ProductList';
 import HomeImage from './HomeImage';
 import Cart from './Cart';
 import LoginSignUp from './LoginSignUp';
+import Product from './Product';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path ="/cart" element={<Cart />} />
         <Route path ="/login" element={<LoginSignUp />} />
         <Route path ="/" element={<HomeImage />} />
+        <Route path="/products/:id" element={<Product />} />
       </Routes>
     </Router>
   );
