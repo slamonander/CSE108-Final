@@ -58,8 +58,8 @@ const ProductList = () => {
         <div className="productGrid">
             {products.map(product => (
                 <div className="productCard" key={product.id}>
-                    <img src={product.image} alt={product.item} />
-                    <h2>{product.item}</h2>
+                    <img src={product.image} alt={product.name} />
+                    <h2>{product.name}</h2>
                     <p>{product.price}</p>
                     <button>Add to cart</button>
                 </div>
