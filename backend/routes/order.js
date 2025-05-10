@@ -2,6 +2,7 @@ import express from 'express';
 import Order from '../models/order.js';
 import User from '../models/user.js';
 import Product from '../models/user.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
 
         //Removes quantity from items
         for (const item of items) {
-            const product = await Product.findById(item.productId);
+            const product = await Product.findById(new mongoose.Types.ObjectId(item.productId));
             if (!product) {
                 return res.status(404).json({ message: `Product ${item.name} not found` });
             }
