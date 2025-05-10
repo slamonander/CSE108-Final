@@ -14,7 +14,7 @@ const HomeImage = () => {
     return (
         <div style={{ textAlign: 'center' }}>
             <h1>Greetings, Traveler.</h1>
-            <h2>Welcome to the Dabloons Marketplace.</h2>
+            <h2 className='welcomeMsg'>Welcome to the Dabloons Marketplace.</h2>
             <img
                 src="https://preview.redd.it/dabloons-cat-v0-1nujqh9wdlwc1.jpeg?auto=webp&s=7d0ebd2a743325280abc8a5f1c727cc7283ac945"
                 alt="Dabloons Cat"
