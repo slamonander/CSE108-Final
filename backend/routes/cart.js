@@ -1,10 +1,11 @@
 import express from 'express';
 import Cart from '../models/cart.js';
+import {auth} from '../controllers/userController.js'
 
 const router = express.Router();
 
 //get the cart by username
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', auth, async (req, res) => {
   const userId = req.params.userId;
   try {
     const cart = await Cart.findOne({ userId });
@@ -17,7 +18,7 @@ router.get('/:userId', async (req, res) => {
 
 
 //add an item to the cart
-router.post('/:userId/items', async (req, res) => {
+router.post('/:userId/items', auth, async (req, res) => {
   const userId = req.params.userId;
   const { productId, name, quantity, price } = req.body;
   try {
@@ -46,7 +47,7 @@ router.post('/:userId/items', async (req, res) => {
 
 
 //update item quantity in cart
-router.put('/:userId/items/:productId', async (req, res) => {
+router.put('/:userId/items/:productId', auth, async (req, res) => {
   const { quantity } = req.body;
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
@@ -66,7 +67,7 @@ router.put('/:userId/items/:productId', async (req, res) => {
 });
 
 //delete item in the cart (by filtering out item)
-router.delete('/:userId/items/:productId', async (req, res) => {
+router.delete('/:userId/items/:productId', auth, async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
     if (!cart) return res.status(404).json({ message: 'Cart not found' });

@@ -3,11 +3,12 @@ import Order from '../models/order.js';
 import User from '../models/user.js';
 import Product from '../models/user.js';
 import mongoose from 'mongoose';
+import {auth} from '../controllers/userController.js'
 
 const router = express.Router();
 
 //Place an order
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         const { username, items, total, address } = req.body;
     
@@ -60,7 +61,7 @@ router.post('/', async (req, res) => {
 });
   
 //Get all orders for a user
-router.get('/:username', async (req, res) => {
+router.get('/:username', auth, async (req, res) => {
     try {
         
         const orders = await Order.find({ username: req.params.username }).sort({ dateCreated: -1 });
@@ -71,7 +72,7 @@ router.get('/:username', async (req, res) => {
 });
   
 //Get order by ID
-router.get('/order/:id', async (req, res) => {
+router.get('/order/:id', auth, async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
         if (!order) return res.status(404).json({ message: 'Order not found' });
@@ -82,7 +83,7 @@ router.get('/order/:id', async (req, res) => {
 });
 
 //Update order status
-router.put('/order/:id/status', async (req, res) => {
+router.put('/order/:id/status', auth, async (req, res) => {
     try {
         const { orderStatus } = req.body;
         const validStatuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Canceled'];

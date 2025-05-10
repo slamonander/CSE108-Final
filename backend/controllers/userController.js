@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
                 id: user.id,
             },
         };
-
+        //console.log("JWT_SECRET used for signing:", JWT_SECRET);
         jwt.sign(
             payload,
             JWT_SECRET,
@@ -110,3 +110,21 @@ export const loginUser = async (req, res) => {
         res.status(500).send('Server error during login');
     }
 };
+
+// --- AUTHENTICATE USER ---
+export const auth = (req, res, next) =>{
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Request needs a token!' });
+    }
+    const token = authHeader.split(' ')[1];
+    try {
+        //console.log("JWT_SECRET used for verifying:", JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded.user; // Attach user info to request
+        console.log("Authenticated User");
+        next(); // Proceed to the route handler
+    } catch (err) {
+        res.status(401).json({ message: `Token is not valid: ` + err.message });
+    }
+  }
