@@ -1,8 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import "./Cart.css";
 import axios from "axios";
-const baseUrl = import.meta.env.VITE_API_URL;
-
+const baseUrl = "https://cse108-final.onrender.com";
 
 const Cart = () => {
     const [cart, setCart] = useState(null);
