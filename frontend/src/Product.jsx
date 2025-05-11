@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Product.css";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
+const baseUrl = "https://cse108-final.onrender.com";
 
 const Product = () => {
     const [cart, setCart] = useState(null);
@@ -20,7 +21,7 @@ const Product = () => {
       
         try {
           await axios.post(
-            `http://localhost:4000/api/products/${productId}/rate`,
+            `${baseUrl}/api/products/${productId}/rate`,
             { rating: userRatings },
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -31,7 +32,7 @@ const Product = () => {
       };
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/products/${id}`)
+        axios.get(`${baseUrl}/api/products/${id}`)
             .then(response => {
                 setProduct(response.data.data);
                 setLoading(false);
@@ -59,7 +60,7 @@ const Product = () => {
         try {
           // product should be an object: { productId, name, quantity, price }
           const res = await axios.post(
-            `http://localhost:4000/api/cart/${userId}/items`,
+            `${baseUrl}/api/cart/${userId}/items`,
             product,
             { headers: { Authorization: `Bearer ${token}` } }
           );

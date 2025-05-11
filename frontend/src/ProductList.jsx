@@ -4,6 +4,7 @@ import "./ProductList.css";
 import { Link } from "react-router-dom";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
+const baseUrl = "https://cse108-final.onrender.com";
 
 const ProductList = () => {
     const [cart, setCart] = useState(null);
@@ -12,7 +13,7 @@ const ProductList = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/products/')
+        axios.get(`${baseUrl}/api/products/`)
             .then(response => {
                 setProducts(response.data.data);
                 setLoading(false);
@@ -32,7 +33,7 @@ const ProductList = () => {
         try {
           // product should be an object: { productId, name, quantity, price }
           const res = await axios.post(
-            `http://localhost:4000/api/cart/${userId}/items`,
+            `${baseUrl}/api/cart/${userId}/items`,
             product,
             { headers: { Authorization: `Bearer ${token}` } }
           );

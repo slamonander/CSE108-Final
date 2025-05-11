@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import "./Cart.css";
 import axios from "axios";
+const baseUrl = "https://cse108-final.onrender.com";
 
 const Cart = () => {
     const [cart, setCart] = useState(null);
@@ -25,7 +26,7 @@ const Cart = () => {
 
       
       axios
-      .get(`http://localhost:4000/api/cart/${userId}`, {
+      .get(`${baseUrl}/api/cart/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
@@ -57,7 +58,7 @@ const Cart = () => {
         else if(newQuantity == 0){
             try {
                 const res = await axios.delete(
-                    `http://localhost:4000/api/cart/${userId}/items/${productId}`,
+                    `${baseUrl}/api/cart/${userId}/items/${productId}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setCart(res.data);
@@ -73,7 +74,7 @@ const Cart = () => {
         
         try {
             const res = await axios.put(
-            `http://localhost:4000/api/cart/${userId}/items/${productId}`,
+            `${baseUrl}/api/cart/${userId}/items/${productId}`,
             { quantity: newQuantity },
             { headers: { Authorization: `Bearer ${token}` } }
             );

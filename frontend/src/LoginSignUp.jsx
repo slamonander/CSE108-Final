@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For redirection
 import './LoginSignUp.css';
+import Snackbar from '@mui/material/Snackbar';
+const baseUrl = "https://cse108-final.onrender.com";
 
 const LoginSignUp = ({setIsAuthenticated}) => {
     const [isLogin, setIsLogin] = useState(true); // To toggle between Login and Sign Up
@@ -13,6 +15,8 @@ const LoginSignUp = ({setIsAuthenticated}) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [agree, setAgree] = useState(false); // For the checkbox
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMsg, setSnackbarMsg] = useState('');
 
     const navigate = useNavigate();
 
@@ -22,6 +26,11 @@ const LoginSignUp = ({setIsAuthenticated}) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setError(''); // Clear error on new input
     }
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setSnackbarOpen(false);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +49,7 @@ const LoginSignUp = ({setIsAuthenticated}) => {
         try {
             // IMPORTANT: Replace 'http://localhost:5000' with your actual backend URL
             // You might want to use an environment variable for this in a real app
-            const response = await fetch(`http://localhost:4000${url}`, {
+            const response = await fetch(`${baseUrl}${url}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,8 +77,11 @@ const LoginSignUp = ({setIsAuthenticated}) => {
                 if (data.user) {
                     localStorage.setItem('user', JSON.stringify(data.user));
                 }
+                
                 // Redirect to home page or dashboard
-                navigate('/'); // Or to a protected route like '/dashboard'
+                setSnackbarMsg(isLogin ? 'Login successful!' : 'Registration successful!');
+                setSnackbarOpen(true);
+                setTimeout(() => navigate('/'), 1500); // Wait a moment before redirect
             } else {
                 // Should not happen if backend sends token on success
                 setError(isLogin ? 'Login failed. Please try again.' : 'Registration failed. Please try again.');
@@ -136,6 +148,13 @@ const LoginSignUp = ({setIsAuthenticated}) => {
                     <button type="submit" disabled={loading}>
                         {loading ? 'Processing...' : (isLogin ? 'Login' : 'Continue')}
                     </button>
+                    <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={handleSnackbarClose}
+                    message={snackbarMsg}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    />
                 </form>
                 {isLogin ? (
                     <p className="loginsignup-toggle">
