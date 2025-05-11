@@ -103,7 +103,7 @@ const Product = () => {
                             setUserRatings(newValue);
                         }}
                     />
-                    <Box sx={{ ml: 0 }}>{userRatings !== null && userRatings !== 0 ? userRatings : 'click stars to rate'}</Box>
+                    <Box sx={{ ml: 0 }}>{userRatings !== null && userRatings !== 0 ? userRatings : 'click stars to rate product'}</Box>
                 </Box>
                 <button onClick={() => handleSubmitRating(product._id)} disabled={!userRatings}>
                 Submit Rating

@@ -50,6 +50,12 @@ const Cart = () => {
           <p>Your basket seems a little empty, traveler.</p>
         </div>
       );
+    if (!cart || !Array.isArray(cart.items))
+      return (
+        <div className="text">
+          <p>Cart array doesn't exist.</p>
+        </div>
+      );  
     
     const handleQuantityChange = async (productId, newQuantity) => {
         const token = localStorage.getItem("token");
