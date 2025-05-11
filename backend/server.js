@@ -35,9 +35,9 @@ app.use("/api/user", userRoutes);   // Correct this if it should be userRoutes
 
 // Serve front
 app.use(express.static(path.join(__dirname, 'build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 app.get("/", (req, res) => {
     res.send("Server is ready");
