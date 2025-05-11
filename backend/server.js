@@ -27,7 +27,7 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173', // Local development
-  'dabloons-market.vercel.app', // Production (Vercel)
+  'https://dabloons-market.vercel.app', // Production (Vercel)
 ];
 
 app.use(cors({
