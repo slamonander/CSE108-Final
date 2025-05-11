@@ -25,7 +25,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-app.use(cors()); // To allow fetching requests
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  }));
+   // To allow fetching requests
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
@@ -43,7 +47,7 @@ app.get("/", (req, res) => {
     res.send("Server is ready");
 });
 
-const port = process.env.PORT || 5000; // Use environment variable for port if available
+const port = 4000; // Use environment variable for port if available
 
 app.listen(port, () => {
     connectDB(); // This is where mongoose.connect is called

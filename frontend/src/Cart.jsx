@@ -25,7 +25,7 @@ const Cart = () => {
 
       
       axios
-      .get(`http://localhost:5000/api/cart/${userId}`, {
+      .get(`http://localhost:4000/api/cart/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
@@ -57,7 +57,7 @@ const Cart = () => {
         else if(newQuantity == 0){
             try {
                 const res = await axios.delete(
-                    `http://localhost:5000/api/cart/${userId}/items/${productId}`,
+                    `http://localhost:4000/api/cart/${userId}/items/${productId}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setCart(res.data);
@@ -73,7 +73,7 @@ const Cart = () => {
         
         try {
             const res = await axios.put(
-            `http://localhost:5000/api/cart/${userId}/items/${productId}`,
+            `http://localhost:4000/api/cart/${userId}/items/${productId}`,
             { quantity: newQuantity },
             { headers: { Authorization: `Bearer ${token}` } }
             );

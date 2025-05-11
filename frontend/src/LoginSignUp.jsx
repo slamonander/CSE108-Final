@@ -40,7 +40,7 @@ const LoginSignUp = ({setIsAuthenticated}) => {
         try {
             // IMPORTANT: Replace 'http://localhost:5000' with your actual backend URL
             // You might want to use an environment variable for this in a real app
-            const response = await fetch(`http://localhost:5000${url}`, {
+            const response = await fetch(`http://localhost:4000${url}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
