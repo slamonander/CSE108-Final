@@ -24,6 +24,12 @@ const Cart = () => {
             setLoading(false);
             return;
         }
+        if (!cart || !Array.isArray(cart.items)) {
+          setError("cart.items is undefined. (see console)");
+          setLoading(false);
+          return;
+      }
+
 
       
       axios
@@ -44,18 +50,20 @@ const Cart = () => {
   
     if (loading) return <div className="text">Loading your cart...</div>;
     if (error) return <div className="text">{error}</div>;
-    if (!cart || cart.items.length === 0)
+/*     
+      if (!cart || !Array.isArray(cart.items)) // this is now in the errors above
+      return (
+        <div className="text">
+          <p> cart.items is undefined.</p>
+        </div>
+      ); 
+ */    
+      if (!cart || cart.items.length === 0)
       return (
         <div className="text">
           <p>Your basket seems a little empty, traveler.</p>
         </div>
       );
-    if (!cart || !Array.isArray(cart.items))
-      return (
-        <div className="text">
-          <p>Cart array doesn't exist.</p>
-        </div>
-      );  
     
     const handleQuantityChange = async (productId, newQuantity) => {
         const token = localStorage.getItem("token");
