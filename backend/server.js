@@ -28,8 +28,9 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://dabloons-market.vercel.app',
-  /^https:\/\/.*\.vercel\.app$/, // Regex to allow all vercel preview deployments
+  /^https:\/\/cse-108-final.*\.vercel\.app$/, // Allow all Vercel preview URLs
 ];
+
 
 app.use(cors({
   origin: (origin, callback) => {
