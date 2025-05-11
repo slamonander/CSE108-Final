@@ -25,10 +25,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173', // Local development
+  'https://cse-108-final-pebbpwhjt-dabloons-market.vercel.app', // Production (Vercel)
+];
+
 app.use(cors({
-    origin: 'https://cse-108-final-pebbpwhjt-dabloons-market.vercel.app', // Using deployed backend instead of localhost, change to local for dev if needed
-    credentials: true
-  }));
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy violation'), false);
+    }
+  },
+  credentials: true,
+}));
+
+app.options('*', cors()); // Handle preflight requests
+
    // To allow fetching requests
 app.use(express.json());
 
