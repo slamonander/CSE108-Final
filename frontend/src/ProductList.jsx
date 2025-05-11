@@ -4,6 +4,7 @@ import "./ProductList.css";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
+    const [cart, setCart] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -20,6 +21,27 @@ const ProductList = () => {
                 setLoading(false);
             });
     }, []);
+
+    const handleCartChange = async (product) => {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user?.id;
+      
+        try {
+          // product should be an object: { productId, name, quantity, price }
+          const res = await axios.post(
+            `http://localhost:5000/api/cart/${userId}/items`,
+            product,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setCart(res.data); // Update cart state with new data from backend
+        } catch (err) {
+          setError(
+            err.response?.data?.error || err.message ||
+              "Could not add item to cart. Please try again."
+          );
+        }
+      };
 
     if (loading) {
         return <div className="text">Loading products. Spare us a moment.</div>
@@ -43,7 +65,14 @@ const ProductList = () => {
                         <h2>{product.name}</h2>
                     </Link>
                     <p>{product.price}</p>
-                    <button>Add to cart</button>
+                    <button className="addButton" onClick={() =>
+                    handleCartChange({
+                        productId: product._id,
+                        name: product.name,
+                        quantity: 1,
+                        price: product.price,
+                    })}>Add to Cart
+                </button>
                 </div>
             ))}
         </div>
