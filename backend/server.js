@@ -26,20 +26,31 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 const allowedOrigins = [
-  'http://localhost:5173', // Local development
-  'https://dabloons-market.vercel.app', // Production (Vercel)
+  'http://localhost:5173',
+  'https://dabloons-market.vercel.app',
+  /^https:\/\/.*\.vercel\.app$/, // Regex to allow all vercel preview deployments
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, true); // Allow non-browser requests
+
+    const isAllowed = allowedOrigins.some((allowedOrigin) => {
+      if (typeof allowedOrigin === 'string') return allowedOrigin === origin;
+      if (allowedOrigin instanceof RegExp) return allowedOrigin.test(origin);
+      return false;
+    });
+
+    if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error('CORS policy violation'), false);
+      console.error(`CORS rejected origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
 }));
+
 
 app.options('*', cors()); // Handle preflight requests
 
