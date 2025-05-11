@@ -30,8 +30,8 @@ app.use(express.json());
 
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes); 
-app.use("/api/orders", orderRoutes); // Correct this if it should be orderRoutes
-app.use("/api/user", userRoutes);   // Correct this if it should be userRoutes
+app.use("/api/orders", orderRoutes);
+app.use("/api/user", userRoutes);
 
 // Serve front
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
