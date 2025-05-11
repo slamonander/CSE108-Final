@@ -1,8 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import "./Cart.css";
 import axios from "axios";
-const baseUrl = import.meta.env.VITE_API_URL;
-
+const baseUrl = "https://cse108-final.onrender.com";
 
 const Cart = () => {
     const [cart, setCart] = useState(null);
@@ -50,12 +49,6 @@ const Cart = () => {
           <p>Your basket seems a little empty, traveler.</p>
         </div>
       );
-    if (!cart || !Array.isArray(cart.items))
-      return (
-        <div className="text">
-          <p>Cart array doesn't exist.</p>
-        </div>
-      );  
     
     const handleQuantityChange = async (productId, newQuantity) => {
         const token = localStorage.getItem("token");

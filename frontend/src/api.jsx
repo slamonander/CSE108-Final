@@ -1,4 +1,4 @@
-const apiBaseUrl = import.meta.env.VITE_API_URL;
+const apiBaseUrl = "https://cse108-final.onrender.com";
 
 /* --------------------- Products --------------------- */
 
