@@ -37,7 +37,9 @@ const Product = () => {
             </div>
             <div className="details">
                 <h2 className="productName">{product.name}</h2>
-                <p>Price: {product.price} dabloons</p>
+                <p className="price">{product.price} dabloons</p>
+                <br />
+                <h3 className="itemDescription">item's description:</h3>
                 <p>{product.description}</p>
                 <p>Category: {product.category}</p>
                 <p>Stock: {product.quantity}</p>
