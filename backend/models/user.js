@@ -37,7 +37,16 @@ const userSchema = new mongoose.Schema({
         required: true,
         min: 0,
         default: 1000,
-    }
+    },
+    ratedProducts: [
+        {
+          productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+          rating: { type: Number, min: 0.5, max: 5, required: true },
+          // Optionally:
+          review: String,
+          ratedAt: { type: Date, default: Date.now }
+        }
+      ]
     
 });
 

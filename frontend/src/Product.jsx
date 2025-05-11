@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Product.css";
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 const Product = () => {
     const [cart, setCart] = useState(null);
@@ -9,6 +11,24 @@ const Product = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [userRatings, setUserRatings] = useState(0);
+
+    const handleSubmitRating = async (productId) => {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user?.id;
+      
+        try {
+          await axios.post(
+            `http://localhost:4000/api/products/${productId}/rate`,
+            { rating: userRatings },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          alert("Rating submitted!");
+        } catch (err) {
+          alert("Could not submit rating: " + err.message);
+        }
+      };
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/products/${id}`)
@@ -72,6 +92,20 @@ const Product = () => {
                         quantity: 1,
                         price: product.price,
                     })}>Add to Cart
+                </button>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Rating
+                        name="user-rating"
+                        value={userRatings}
+                        precision={0.5}
+                        onChange={(event, newValue) => {
+                            setUserRatings(newValue);
+                        }}
+                    />
+                    <Box sx={{ ml: 2 }}>{userRatings !== null ? userRatings : ''}</Box>
+                </Box>
+                <button onClick={() => handleSubmitRating(product._id)} disabled={!userRatings}>
+                Submit Rating
                 </button>
             </div>
         </div>

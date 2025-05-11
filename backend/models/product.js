@@ -23,6 +23,14 @@ const productSchema = new mongoose.Schema({
     quantity:{
         type: Number,
         required: true
+    },
+    ratingTotal: {
+        type: Number,
+        default: 0
+    },
+    ratingCount: {
+        type: Number,
+        default: 0
     }
     
 }, {

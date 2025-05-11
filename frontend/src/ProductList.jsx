@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import "./ProductList.css";
 import { Link } from "react-router-dom";
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 const ProductList = () => {
     const [cart, setCart] = useState(null);
@@ -65,6 +67,19 @@ const ProductList = () => {
                         <h2>{product.name}</h2>
                     </Link>
                     <p>{product.price}</p>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                        <Rating
+                            name={`product-rating-${product._id}`}
+                            value={product.ratingCount > 0 ? product.ratingTotal / product.ratingCount : 0}
+                            precision={0.5}
+                            readOnly
+                        />
+                        <Box sx={{ ml: 2 }}>
+                            {product.ratingCount > 0
+                            ? `${(product.ratingTotal / product.ratingCount).toFixed(1)} (${product.ratingCount} review${product.ratingCount > 1 ? 's' : ''})`
+                            : 'No ratings yet'}
+                        </Box>
+                    </Box>
                     <button className="addButton" onClick={() =>
                     handleCartChange({
                         productId: product._id,
@@ -72,7 +87,7 @@ const ProductList = () => {
                         quantity: 1,
                         price: product.price,
                     })}>Add to Cart
-                </button>
+                    </button>
                 </div>
             ))}
         </div>

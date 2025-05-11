@@ -1,6 +1,8 @@
 import express from 'express';
 import Product from '../models/product.js';
 import mongoose from 'mongoose';
+import { auth } from '../controllers/userController.js';
+import User from '../models/user.js';
 
 const router = express.Router();
 
@@ -99,5 +101,72 @@ router.put("/:id", async (req, res) =>{
         res.status(500).json({success:false, message: "Server Error"})
     }
 })
+
+router.post("/:id/rate", auth, async (req, res) => {
+    const { id: productId } = req.params;
+    const { rating, review } = req.body;
+    const userId = req.user.id;
+  
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(404).json({ success: false, message: "Invalid product ID." });
+    }
+    if (typeof rating !== "number" || rating < 0 || rating > 5) {
+      return res.status(400).json({ success: false, message: "Rating must be 0-5." });
+    }
+  
+    try {
+      const user = await User.findById(userId);
+      const product = await Product.findById(productId);
+      if (!user || !product) {
+        return res.status(404).json({ success: false, message: "User or product not found." });
+      }
+  
+      const existingReview = user.ratedProducts.find(
+        (r) => r.productId.toString() === productId
+      );
+  
+      if (existingReview) {
+        // Adjust product ratingTotal, do not change ratingCount
+        product.ratingTotal = (product.ratingTotal || 0) - existingReview.rating + rating;
+      } else {
+        product.ratingTotal = (product.ratingTotal || 0) + rating;
+        product.ratingCount = (product.ratingCount || 0) + 1;
+      }
+      await product.save();
+  
+      // Update or add review in user's ratedProducts
+      if (existingReview) {
+        await User.findOneAndUpdate(
+          { _id: userId, "ratedProducts.productId": productId },
+          {
+            $set: {
+              "ratedProducts.$.rating": rating,
+              "ratedProducts.$.review": review,
+              "ratedProducts.$.ratedAt": new Date()
+            }
+          }
+        );
+      } else {
+        await User.findByIdAndUpdate(
+          userId,
+          {
+            $push: {
+              ratedProducts: {
+                productId: productId,
+                rating: rating,
+                review: review,
+                ratedAt: new Date()
+              }
+            }
+          }
+        );
+      }
+  
+      res.status(200).json({ success: true, data: product });
+    } catch (error) {
+      console.error("Unable to rate product:", error.message);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  });
 
 export default router;
