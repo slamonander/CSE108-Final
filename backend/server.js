@@ -26,7 +26,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://cse108-final.onrender.com', // Using deployed backend instead of localhost, change to local for dev if needed
     credentials: true
   }));
    // To allow fetching requests
