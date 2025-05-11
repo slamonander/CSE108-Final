@@ -11,41 +11,35 @@ const Cart = () => {
   
     useEffect(() => {
         const token = localStorage.getItem("token");
+        let userId = null;
         try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            userId = user.id;
+          const user = JSON.parse(localStorage.getItem("user"));
+          userId = user.id;
         } catch (error) {
-            userId = null;
+          userId = null;
         }
-
+      
         if (!userId || !token) {
-            setError("You must be logged in to view your cart.");
-            setLoading(false);
-            return;
-        }
-        if (!cart || !Array.isArray(cart.items)) {
-          setError("cart.items is undefined. (see console)");
+          setError("You must be logged in to view your cart.");
           setLoading(false);
           return;
-      }
-
-
+        }
       
-      axios
-      .get(`${baseUrl}/api/cart/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
+        axios
+          .get(`${baseUrl}/api/cart/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
             setCart(res.data);
             setLoading(false);
-        })
-        .catch((err) => {
-          setError(
-            err.response?.data?.message || "Could not fetch cart. Please try again."
-          );
-          setLoading(false);
-        });
-    }, []);
+          })
+          .catch((err) => {
+            setError(
+              err.response?.data?.message || "Could not fetch cart. Please try again."
+            );
+            setLoading(false);
+          });
+      }, []);
   
     if (loading) return <div className="text">Loading your cart...</div>;
     if (error) return <div className="text">{error}</div>;
