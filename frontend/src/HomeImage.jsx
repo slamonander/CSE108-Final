@@ -12,26 +12,49 @@ const photos = [
 
 const HomeImage = () => {
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Greetings, Traveler.</h1>
-            <h2 className='welcomeMsg'>Welcome to the Dabloons Marketplace.</h2>
-            <img
-                src="https://preview.redd.it/dabloons-cat-v0-1nujqh9wdlwc1.jpeg?auto=webp&s=7d0ebd2a743325280abc8a5f1c727cc7283ac945"
-                alt="Dabloons Cat"
-                style={{ maxWidth: '100%', height: 'auto', marginTop: '20px' }}
-            />
-            
-            <h3>Peruse our collections to your heart's content.</h3>
-            
-            <div className="photoGrid">
-                {photos.map((src, index) => (
-                    <div className='photoItem' key={index}>
-                        <img src={src} alt={'Item ${index + 1}'} />
-                    </div>
-                ))}
+        <div className="homeContainer">
+            <div className="dabloonCat">
+                <img
+                    src="https://preview.redd.it/dabloons-cat-v0-1nujqh9wdlwc1.jpeg?auto=webp&s=7d0ebd2a743325280abc8a5f1c727cc7283ac945"
+                    alt="Dabloons Cat"
+                    style={{ maxWidth: '100%', height: 'auto', marginTop: '20px' }}
+                />
             </div>
 
-         </div>
+            <div className="homeContent">
+                <h1>Greetings, Traveler.</h1>
+                <h2 className='welcomeMsg'>Welcome to the Dabloons Marketplace.</h2>
+                <h3>Peruse our collections to your heart's content.</h3>
+
+            <div className="photoGrid">
+                    {photos.map((src, index) => (
+                        <div className='photoItem' key={index}>
+                            <img src={src} alt={'Item ${index + 1}'} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        // <div style={{ textAlign: 'center' }}>
+        //     <h1>Greetings, Traveler.</h1>
+        //     <h2 className='welcomeMsg'>Welcome to the Dabloons Marketplace.</h2>
+        //     <img
+        //         src="https://preview.redd.it/dabloons-cat-v0-1nujqh9wdlwc1.jpeg?auto=webp&s=7d0ebd2a743325280abc8a5f1c727cc7283ac945"
+        //         alt="Dabloons Cat"
+        //         style={{ maxWidth: '100%', height: 'auto', marginTop: '20px' }}
+        //     />
+            
+        //     <h3>Peruse our collections to your heart's content.</h3>
+            
+        //     <div className="photoGrid">
+        //         {photos.map((src, index) => (
+        //             <div className='photoItem' key={index}>
+        //                 <img src={src} alt={'Item ${index + 1}'} />
+        //             </div>
+        //         ))}
+        //     </div>
+        //  </div>
     );
   };
   

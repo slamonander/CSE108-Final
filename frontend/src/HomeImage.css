@@ -6,13 +6,35 @@ body {
     font-family: "Tagesschrift", system-ui;
     font-style: normal;
 }
-h1 {
-    animation: upDownFloat 3s ease-in-out infinite;
+
+.homeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    justify-content: center;
 }
 
-.welcomeMsg {
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in 1.8s forwards;
+.dabloonCat img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.homeContent {
+    flex: 1;
+    min-width: 300px;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    animation: upDownFloat 3s ease-in-out infinite;
 }
 
 .photoGrid {
@@ -54,5 +76,19 @@ h1 {
         transform: translate(0,0);
     } 50% {
         transform: translate(0, 7px);
+    }
+}
+
+/* Responsive for smaller screens */
+
+@media (max-width: 768px) {
+    .homeContainer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .photoItem {
+        width: 100%;
     }
 }
