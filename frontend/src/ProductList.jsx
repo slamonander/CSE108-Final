@@ -11,6 +11,7 @@ const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [sortOption, setSortOption] = useState('');
 
     useEffect(() => {
         axios.get(`${baseUrl}/api/products/`)
@@ -44,7 +45,26 @@ const ProductList = () => {
               "Could not add item to cart. Please try again."
           );
         }
-      };
+    };
+    
+    const sortProducts = (products, option) => {
+        const sorted = [...products];
+        switch (option) {
+            case 'price':
+                sorted.sort((a, b) => a.price - b.price);
+                break;
+            case 'reviews':
+                sorted.sort((a, b) => b.ratingCount - a.ratingCount);
+                break;
+            case 'average':
+                const avg = p => p.ratingCount > 0 ? p.ratingTotal / p.ratingCount : 0;
+                sorted.sort((a, b) => avg(b) - avg(a));
+                break;
+            default:
+                break;
+        }
+        return sorted;
+    };
 
     if (loading) {
         return <div className="text">Loading products. Spare us a moment.</div>
@@ -60,8 +80,23 @@ const ProductList = () => {
 
 
     return (
+        <>
+        <div className="sortContainer">
+                <label htmlFor="sort">Sort by: </label>
+                <select
+                    id="sort"
+                    value={sortOption}
+                    onChange={(e) => setSortOption(e.target.value)}
+                >
+                    <option value="">Default</option>
+                    <option value="price">Price (Low to High)</option>
+                    <option value="reviews">Number of Reviews</option>
+                    <option value="average">Average Rating</option>
+                </select>
+            </div>
+
         <div className="productGrid">
-            {products.map(product => (
+            {sortProducts(products, sortOption).map(product => (
                 <div className="productCard" key={product._id}>
                     <Link to={`/products/${product._id}`}>
                         <img src={product.image} alt={product.name} />
@@ -92,6 +127,7 @@ const ProductList = () => {
                 </div>
             ))}
         </div>
+        </>
     );
 };
 
