@@ -35,3 +35,34 @@
     color: rgb(193, 183, 48);
     transform: translateY(-7px);
 }
+
+.logoutBtn {
+    /* background-color: #EAE6DF;
+    padding: 15px 35px;
+    margin: 20px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    transition: .3s ease-in;
+    animation: .5s ease-in;
+    border: 1px; */
+
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    font-family: "Tagesschrift", system-ui;
+    transition: .3s ease-in;
+    animation: .5s ease-in;
+}
+
+.logoutBtn:hover {
+    background-color: #e7d72a;
+    color: white;
+    border: 1px;
+    border-radius: 30px;
+    cursor: pointer;
+    /* background-color: #000;
+    color: #EAE6DF;
+    border: 1px;
+    border-radius: 30px;
+    cursor: pointer; */
+}
