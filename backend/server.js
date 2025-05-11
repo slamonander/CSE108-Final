@@ -45,7 +45,22 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 5000; // Use environment variable for port if available
 
-app.listen(port, () => {
-    connectDB(); // This is where mongoose.connect is called
-    console.log(`Server started at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     connectDB(); // This is where mongoose.connect is called
+//     console.log(`Server started at http://localhost:${port}`);
+// });
+
+const startServer = async () => {
+    try {
+        await connectDB(); // make sure this is an async function
+        app.listen(port, () => {
+            console.log(`Server started at http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+};
+
+startServer();
+
