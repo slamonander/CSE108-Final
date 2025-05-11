@@ -35,9 +35,6 @@ app.use("/api/user", userRoutes);   // Correct this if it should be userRoutes
 
 // Serve front
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'favicon.ico'));
-});
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
 });
