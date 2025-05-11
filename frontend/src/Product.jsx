@@ -94,7 +94,7 @@ const Product = () => {
                         price: product.price,
                     })}>Add to Cart
                 </button>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Box sx={{ alignItems: 'center', mb: 1, mt: 4 }}>
                     <Rating
                         name="user-rating"
                         value={userRatings}
@@ -103,7 +103,7 @@ const Product = () => {
                             setUserRatings(newValue);
                         }}
                     />
-                    <Box sx={{ ml: 2 }}>{userRatings !== null ? userRatings : ''}</Box>
+                    <Box sx={{ ml: 0 }}>{userRatings !== null && userRatings !== 0 ? userRatings : 'click stars to rate'}</Box>
                 </Box>
                 <button onClick={() => handleSubmitRating(product._id)} disabled={!userRatings}>
                 Submit Rating
