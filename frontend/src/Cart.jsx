@@ -48,6 +48,43 @@ const Cart = () => {
           <p>Your basket seems a little empty, traveler.</p>
         </div>
       );
+    
+    const handleQuantityChange = async (productId, newQuantity) => {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user?.id;
+        if (newQuantity < 0) return;
+        else if(newQuantity == 0){
+            try {
+                const res = await axios.delete(
+                    `http://localhost:5000/api/cart/${userId}/items/${productId}`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setCart(res.data);
+              } catch (err) {
+                setError(
+                    err.response?.data?.message ||
+                    "Could not remove item from cart."
+                );
+              }
+              return;
+        }
+        
+        
+        try {
+            const res = await axios.put(
+            `http://localhost:5000/api/cart/${userId}/items/${productId}`,
+            { quantity: newQuantity },
+            { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setCart(res.data); // Update cart state with new data from backend
+        } catch (err) {
+            setError(
+            err?.message ||
+                "Could not update cart. Please try again."
+            );
+        }
+    };
   
     return (
       <div className="cart-container">
@@ -55,11 +92,13 @@ const Cart = () => {
         <ul className="cart-items">
           {cart.items.map((item) => (
             <li key={item.productId} className="cart-item">
-              <span className="item-name">{item.name}</span>
-              <span className="item-qty"> (x{item.quantity}) </span>
-              <span className="item-price">
-                ${(item.price * item.quantity).toFixed(2)}
-              </span>
+            <span className="item-name">{item.name}</span>
+            <span className="item-qty"> (x{item.quantity}) </span>
+            <span className="item-price">
+            ${(item.price * item.quantity).toFixed(2)}
+            </span>
+            <button onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}>+</button>
+            <button onClick={() => handleQuantityChange(item.productId, item.quantity - 1)} disabled={item.quantity < 1}>-</button>
             </li>
           ))}
         </ul>
