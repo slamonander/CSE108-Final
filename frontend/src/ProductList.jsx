@@ -68,18 +68,18 @@ const ProductList = () => {
                         <h2>{product.name}</h2>
                     </Link>
                     <p>{product.price}</p>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Box sx={{ alignItems: 'center', mb: 0 }}>
                         <Rating
                             name={`product-rating-${product._id}`}
                             value={product.ratingCount > 0 ? product.ratingTotal / product.ratingCount : 0}
                             precision={0.5}
                             readOnly
                         />
-                        <Box sx={{ ml: 2 }}>
-                            {product.ratingCount > 0
-                            ? `${(product.ratingTotal / product.ratingCount).toFixed(1)} (${product.ratingCount} review${product.ratingCount > 1 ? 's' : ''})`
-                            : 'No ratings yet'}
-                        </Box>
+                    </Box>
+                    <Box sx={{ ml: 0, mb:3 }}>
+                        {product.ratingCount > 0
+                        ? `${(product.ratingTotal / product.ratingCount).toFixed(1)} (${product.ratingCount} review${product.ratingCount > 1 ? 's' : ''})`
+                        : 'No ratings yet'}
                     </Box>
                     <button className="addButton" onClick={() =>
                     handleCartChange({
