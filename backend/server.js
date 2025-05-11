@@ -47,9 +47,9 @@ app.get("/", (req, res) => {
     res.send("Server is ready");
 });
 
-const port = 4000; // Use environment variable for port if available
+const port = process.env.PORT; // Use environment variable for port if available
 
 app.listen(port, () => {
     connectDB(); // This is where mongoose.connect is called
-    console.log(`Server started at http://localhost:${port}`);
+    //console.log(`Server started at http://localhost:${port}`);
 });
