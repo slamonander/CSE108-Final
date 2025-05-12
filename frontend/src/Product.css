@@ -37,6 +37,7 @@
 }
 
 .details button {
+    font-family: "Tagesschrift", system-ui;
     background-color: #007bff;
     color: white;
     border: none;
@@ -94,20 +95,21 @@
 }
 
 .backBtn {
-  margin-bottom: 20px;
-  padding: 8px 16px;
-  margin-right: 10px;
-  background-color: #f2f2f2;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Tagesschrift", system-ui;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .backBtn:hover {
-  background-color: black;
-  color: white;
+    background-color: black;
+    color: white;
 }
 
 .quantity {
