@@ -28,10 +28,12 @@ const HomeImage = () => {
                 <h3>
                     Peruse our <Link to="/products">wares</Link> to your heart's content.
                 </h3>
-            <div className="photoGrid">
+                <div className="photoGrid">
                     {photos.map((src, index) => (
-                        <div className='photoItem' key={index}>
-                            <img src={src} alt={'Item ${index + 1}'} />
+                        <div className="photoItem" key={index}>
+                        <Link to="/products">
+                            <img src={src} alt={`Item ${index + 1}`} />
+                        </Link>
                         </div>
                     ))}
                 </div>
