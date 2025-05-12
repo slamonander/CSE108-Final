@@ -5,6 +5,7 @@ import "./Product.css";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 const baseUrl = "https://cse108-final.onrender.com";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
     const [cart, setCart] = useState(null);
@@ -16,6 +17,8 @@ const Product = () => {
 
     const [isAdded, setIsAdded] = useState(false);
     const [isBouncing, setIsBouncing] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleSubmitRating = async (productId) => {
         const token = localStorage.getItem("token");
@@ -93,6 +96,11 @@ const Product = () => {
 
     return (
         <div className="productInfo">
+
+          <button className="backBtn" onClick={() => navigate('/products')}>
+            Go Back
+          </button>
+
             <div className="productImg">
                 <img src={product.image} alt={product.name} />
             </div>
@@ -103,7 +111,7 @@ const Product = () => {
                 <h3 className="itemDescription">item's description:</h3>
                 <p>{product.description}</p>
                 <p>Category: {product.category}</p>
-                <p>Stock: {product.quantity}</p>
+                <p>Stock: <span className="quantity">{product.quantity}</span></p>
                 <button onClick={() =>
                     handleCartChange({
                         productId: product._id,
