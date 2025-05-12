@@ -8,6 +8,14 @@
   animation: upDownFloat 3s ease-in-out infinite;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited{
+  color: black;
+}
+ 
 .productGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -18,7 +26,7 @@
   }
   
   .productCard {
-    background-color: #fff;
+    background-color: oldlace;
     border: 1px solid #ccc;
     padding: 1rem;
     text-align: center;
@@ -48,8 +56,9 @@
   }
   
   .productCard button {
+    font-family: "Tagesschrift", system-ui;
     background-color: #007bff;
-    color: white;
+    color: oldlace;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -61,6 +70,7 @@
   }
 
   .sortContainer {
+    font-family: "Tagesschrift", system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,6 +82,7 @@
   
   .sortContainer select {
     padding: 0.4rem 0.8rem;
+    font-family: "Tagesschrift", system-ui;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 6px;
