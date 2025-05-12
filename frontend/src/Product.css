@@ -1,11 +1,17 @@
 .productInfo {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 40px;
+    max-width: 1000px;
     text-align: center;
-    margin: 0;
+    margin: 0 auto;
     padding: 5%;
     flex-wrap: wrap;
+}
+
+.productImg {
+    flex-shrink: 0;
 }
 
 .productImg img {
@@ -16,7 +22,9 @@
 
 .details {
     flex: 1;
-    min-width: 250px;
+    min-width: 300px;
+    max-width: 600px;
+    text-align: left;
 }
 
 .details button {
@@ -74,4 +82,25 @@
     background-color: rgb(45, 184, 38);
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.backBtn {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.backBtn:hover {
+  background-color: black;
+  color: white;
+}
+
+.quantity {
+    color:rgb(227, 169, 8);
 }
