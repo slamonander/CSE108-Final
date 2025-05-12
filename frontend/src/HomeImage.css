@@ -37,7 +37,15 @@ h1, h2, h3 {
     margin-top: 0;
     margin-bottom: 1rem;
 }
-
+.inline-link {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  
+  .inline-link:hover {
+    color: #007bff;
+  }
 h1 {
     animation: upDownFloat 3s ease-in-out infinite;
 }
