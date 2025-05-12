@@ -1,5 +1,6 @@
 import React from 'react';
 import "./HomeImage.css";
+import { Link } from "react-router-dom";
 
 const photos = [
     "https://minecraft.wiki/images/Water_Bottle_JE2_BE2.png?acae5",
@@ -24,8 +25,9 @@ const HomeImage = () => {
             <div className="homeContent">
                 <h1>Greetings, Traveler.</h1>
                 <h2 className='welcomeMsg'>Welcome to the Dabloons Marketplace.</h2>
-                <h3>Peruse our collections to your heart's content.</h3>
-
+                <h3>
+                    Peruse our <Link to="/products">wares</Link> to your heart's content.
+                </h3>
             <div className="photoGrid">
                     {photos.map((src, index) => (
                         <div className='photoItem' key={index}>
