@@ -14,6 +14,9 @@ const Product = () => {
     const [error, setError] = useState('');
     const [userRatings, setUserRatings] = useState(0);
 
+    const [isAdded, setIsAdded] = useState(false);
+    const [isBouncing, setIsBouncing] = useState(false);
+
     const handleSubmitRating = async (productId) => {
         const token = localStorage.getItem("token");
         const user = JSON.parse(localStorage.getItem("user"));
@@ -67,6 +70,19 @@ const Product = () => {
             { headers: { Authorization: `Bearer ${token}` } }
           );
           setCart(res.data); // Update cart state with new data from backend
+
+          // Button feedback to notify item has been added to cart
+          setIsBouncing(true);
+          setIsAdded(true);
+
+          setTimeout(() => {
+            setIsBouncing(false);
+          }, 500);
+
+          setTimeout(() => {
+            setIsAdded(false);
+          }, 1500)
+
         } catch (err) {
           setError(
             err.response?.data?.error || err.message ||
@@ -94,7 +110,11 @@ const Product = () => {
                         name: product.name,
                         quantity: 1,
                         price: product.price,
-                    })}>Add to Cart
+                    })
+                  }
+                  className={isBouncing ? "bounce" : ""}
+                >
+                  {isAdded ? "Added" : "Add to Cart"}
                 </button>
                 <Box sx={{ alignItems: 'center', mb: 1, mt: 4 }}>
                     <Rating
