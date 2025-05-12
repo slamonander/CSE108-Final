@@ -81,7 +81,7 @@ const Product = () => {
 
           setTimeout(() => {
             setIsAdded(false);
-          }, 1500)
+          }, 1000)
 
         } catch (err) {
           setError(
@@ -112,7 +112,7 @@ const Product = () => {
                         price: product.price,
                     })
                   }
-                  className={isBouncing ? "bounce" : ""}
+                  className={`${isBouncing ? "bounce" : ""} ${isAdded ? "added" : ""}`}
                 >
                   {isAdded ? "Added" : "Add to Cart"}
                 </button>
