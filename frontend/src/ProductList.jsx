@@ -4,6 +4,8 @@ import "./ProductList.css";
 import { Link } from "react-router-dom";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const baseUrl = "https://cse108-final.onrender.com";
 
 const ProductList = () => {
@@ -12,6 +14,8 @@ const ProductList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [sortOption, setSortOption] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
 useEffect(() => {
     axios.get(`${baseUrl}/api/products/`)
@@ -33,13 +37,15 @@ useEffect(() => {
         const userId = user?.id;
       
         try {
-          // product should be an object: { productId, name, quantity, price }
-          const res = await axios.post(
-            `${baseUrl}/api/cart/${userId}/items`,
-            product,
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-          setCart(res.data); // Update cart state with new data from backend
+            // product should be an object: { productId, name, quantity, price }
+            const res = await axios.post(
+                `${baseUrl}/api/cart/${userId}/items`,
+                product,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setCart(res.data); // Update cart state with new data from backend
+            setSnackbarMessage(`${product.name} added to cart!`);
+            setSnackbarOpen(true);
         } catch (err) {
           setError(
             err.response?.data?.error || err.message ||
@@ -78,6 +84,13 @@ useEffect(() => {
     if (!products.length) {
         return <div className="text">Apologies. It seems like we are out of inventory.</div>;
     }
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setSnackbarOpen(false);
+      };
 
 
     return (
@@ -128,6 +141,16 @@ useEffect(() => {
                 </div>
             ))}
         </div>
+        <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+            <MuiAlert onClose={handleSnackbarClose} severity={error ? "error" : "success"} elevation={6} variant="filled">
+                {snackbarMessage}
+            </MuiAlert>
+        </Snackbar>
         </>
     );
 };

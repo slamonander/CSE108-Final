@@ -83,6 +83,11 @@ a:visited{
     gap: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
+      text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
   }
   
   .sortContainer select {
