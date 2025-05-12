@@ -5,6 +5,9 @@ body {
     padding-bottom: 5%;
     font-family: "Tagesschrift", system-ui;
     font-style: normal;
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.itch.zone%2FaW1hZ2UvMTcwNDkzOC8xMDA0NDI4Ni5wbmc%3D%2Foriginal%2FhLtBVP.png&f=1&nofb=1&ipt=e549fbafa753c08e509e18d0a64023942f77883ae9b093f5ad8b3197d73c141a://www.transparenttextures.com/patterns/brick-wall.png');
+    background-repeat: repeat;
+
 }
 
 .homeContainer {
@@ -14,6 +17,7 @@ body {
     gap: 2rem;
     padding: 2rem;
     justify-content: center;
+    background-color: oldlace;
 }
 
 .dabloonCat img {
