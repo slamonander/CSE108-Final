@@ -26,6 +26,7 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .details button:hover {
@@ -69,7 +70,7 @@
     animation: bounce 0.5s ease;
 }
 
-.added {
+.details button.added {
     background-color: rgb(45, 184, 38);
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
