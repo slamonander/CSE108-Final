@@ -21,7 +21,7 @@ const Product = () => {
       
         try {
           await axios.post(
-            `${baseUrl}/api/product/${productId}/rate`,
+            `${baseUrl}/api/products/${productId}/rate`,
             // `${baseUrl}/api/products/${productId}/rate`,
             { rating: userRatings },
             { headers: { Authorization: `Bearer ${token}` } }
@@ -33,7 +33,7 @@ const Product = () => {
       };
 
     useEffect(() => {
-            axios.get(`${baseUrl}/api/product/${id}`)
+            axios.get(`${baseUrl}/api/products/${id}`)
         // axios.get(`${baseUrl}/api/products/${id}`)
             .then(response => {
                 setProduct(response.data.data);
