@@ -1,43 +1,25 @@
 .productInfo {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
-    gap: 40px;
-    max-width: 1000px;
+    justify-content: center;
     text-align: center;
-    margin: 0 auto;
+    margin: 0;
     padding: 5%;
     flex-wrap: wrap;
-}
-
-.productImg {
-    flex-shrink: 0;
-    animation: upDownFloat 3s ease-in-out infinite;
 }
 
 .productImg img {
     max-width: 300px;
     height: auto;
     border-radius: 12px;
-    transition: transform 0.2s ease;
-}
-
-.productImg img:hover {
-    transform: scale(1.1);
 }
 
 .details {
     flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    text-align: left;
-    background-color: beige;
-    padding: 30px;
-    border-radius: 10px;
+    min-width: 250px;
 }
 
 .details button {
-    font-family: "Tagesschrift", system-ui;
     background-color: #007bff;
     color: white;
     border: none;
@@ -92,26 +74,4 @@
     background-color: rgb(45, 184, 38);
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.backBtn {
-    font-family: "Tagesschrift", system-ui;
-    margin-bottom: 20px;
-    padding: 8px 16px;
-    margin-right: 10px;
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.backBtn:hover {
-    background-color: black;
-    color: white;
-}
-
-.quantity {
-    color:rgb(227, 169, 8);
 }
