@@ -106,20 +106,28 @@ const Cart = () => {
         }
       
         try {
-          setLoading(true);
-          const res = await axios.post(
-            `${baseUrl}/api/cart/${userId}/purchase`,
-            {},
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-          setLoading(false);
-          setCart({ items: [], total: 0 }); // Clear cart on purchase
-          alert("Purchase successful! Thank you for shopping.");
-        } catch (err) {
-          setLoading(false);
-          setError(
-            err.response?.data?.message || "Purchase failed. Please try again."
-          );
+            setLoading(true);
+            const res = await axios.post(
+                `${baseUrl}/api/cart/${userId}/purchase`,
+                {},
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setLoading(false);
+            setCart({ items: [], total: 0 }); // Clear cart on purchase
+
+            // Update user balance in localStorage before dispatching event
+            if (res.data.balance !== undefined) {
+                const updatedUser = { ...user, balance: res.data.balance };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            }
+
+            window.dispatchEvent(new Event("userUpdated")) //Update nav bar
+            alert("Purchase successful! Thank you for shopping.");
+            } catch (err) {
+            setLoading(false);
+            setError(
+                err.response?.data?.message || "Purchase failed. Please try again."
+            );
         }
       };
     return (

@@ -6,10 +6,26 @@ const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
     const [balance, setBalance] = useState(null)
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user.balance != null) {
-            setBalance(user.balance);
-        }
+        // Function to update balance from localStorage
+        const updateBalance = () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.balance != null) {
+                setBalance(user.balance);
+            } else {
+                setBalance(null);
+            }
+        };
+    
+        // Run on mount and when isAuthenticated changes
+        updateBalance();
+    
+        // Listen for the custom "userUpdated" event
+        window.addEventListener('userUpdated', updateBalance);
+    
+        // Cleanup the event listener on unmount
+        return () => {
+            window.removeEventListener('userUpdated', updateBalance);
+        };
     }, [isAuthenticated]);
 
     const handleLogout = () =>{
