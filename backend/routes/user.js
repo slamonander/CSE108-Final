@@ -1,6 +1,6 @@
 // backend/routes/user.js
 import express from 'express';
-import { registerUser, loginUser } from '../controllers/userController.js'; // Adjust path as needed
+import { registerUser, loginUser, getDabloonsBalance } from '../controllers/userController.js'; // Ensure getDabloonsBalance is imported
 
 const router = express.Router();
 
@@ -13,5 +13,10 @@ router.post('/register', registerUser);
 // @desc    Authenticate user & get token
 // @access  Public
 router.post('/login', loginUser);
+
+// @route   GET api/user/dabloons/balance
+// @desc    Get user's dabloons balance
+// @access  Private (requires authentication)
+router.get('/dabloons/balance', auth, getDabloonsBalance);  // Make sure this route exists
 
 export default router;

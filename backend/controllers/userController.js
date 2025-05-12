@@ -64,28 +64,25 @@ export const registerUser = async (req, res) => {
 
 // --- LOGIN USER ---
 export const loginUser = async (req, res) => {
-    const { email, password } = req.body; // Or login with username
+    const { email, password } = req.body;
 
     try {
-        // 1. Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials (email not found)' });
         }
 
-        // 2. Compare password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: `Invalid credentials` });
         }
 
-        // 3. User matched, create JWT
         const payload = {
             user: {
                 id: user.id,
             },
         };
-        //console.log("JWT_SECRET used for signing:", JWT_SECRET);
+
         jwt.sign(
             payload,
             JWT_SECRET,
@@ -94,14 +91,14 @@ export const loginUser = async (req, res) => {
                 if (err) throw err;
                 res.json({
                     token,
-                    user: { // Send some user info back if needed
+                    user: { 
                         id: user.id,
                         name: user.name,
                         email: user.email,
                         username: user.username,
-                        balance: user.balance
+                        balance: user.balance,  // Ensure balance is part of the response
                     },
-                    message: 'Login successful'
+                    message: 'Login successful',
                 });
             }
         );
@@ -128,3 +125,22 @@ export const auth = (req, res, next) =>{
         res.status(401).json({ message: `Token is not valid: ` + err.message });
     }
   }
+
+// --- GET DABLOONS BALANCE --- 
+export const getDabloonsBalance = async (req, res) => {
+    try {
+        const userId = req.user.id;  // The user ID is available in req.user because of the auth middleware
+
+        // Find the user and return their balance (assuming 'balance' field in your User model)
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Send back the user's balance (assuming it's called 'balance')
+        res.json({ balance: user.balance });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error while fetching balance');
+    }
+};

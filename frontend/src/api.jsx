@@ -187,3 +187,42 @@ export async function deleteCartItem(userId, productId, token) {
   if (!res.ok) throw new Error("Failed to delete item from cart");
   return res.json();
 }
+
+
+/* --------------------- Dabloons --------------------- */
+
+export async function getDabloonsBalance(userId, token) {
+  const res = await fetch(`${apiBaseUrl}/api/user/dabloons/balance`, {
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${token}`  // Use the Bearer token to authenticate
+      }
+  });
+
+  if (!res.ok) throw new Error('Failed to fetch dabloons balance');
+  return res.json();
+}
+
+export async function initializeDabloons(userId, token) {
+  const res = await fetch(`${apiBaseUrl}/api/dabloons/init/${userId}`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  if (!res.ok) throw new Error("Failed to initialize dabloons");
+  return res.json();
+}
+
+export async function updateDabloonsBalance(userId, amount, token) {
+  const res = await fetch(`${apiBaseUrl}/api/dabloons/${userId}/balance`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ amount })
+  });
+  if (!res.ok) throw new Error("Failed to update dabloons balance");
+  return res.json();
+}
