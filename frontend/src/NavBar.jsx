@@ -42,7 +42,7 @@ const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
                 <li><Link to="/products">Items</Link></li>
                 <li><Link to="/cart">Basket</Link></li>
                 {isAuthenticated && balance != null && (
-                    <li className="balance">💰 {balance} dabloons</li>
+                    <li className="balance">💰 {balance.toFixed(2)} dabloons</li>
                 )}
                 {isAuthenticated ? <li><button className="logoutBtn" onClick={handleLogout}>Log out</button></li> : <li><Link to="/login">Login</Link></li> }
             </ul>
