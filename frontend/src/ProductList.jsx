@@ -14,7 +14,8 @@ const ProductList = () => {
     const [sortOption, setSortOption] = useState('');
 
     useEffect(() => {
-        axios.get(`${baseUrl}/api/products/`)
+        // axios.get(`${baseUrl}/api/products/`)
+        axios.get(`${baseUrl}/api/product/`)
             .then(response => {
                 setProducts(response.data.data);
                 setLoading(false);
