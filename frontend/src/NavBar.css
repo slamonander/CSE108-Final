@@ -72,3 +72,11 @@
     transform: translateY(-7px);
 }
 
+.balance {
+        text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
+}
+
