@@ -9,6 +9,12 @@
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    color: black;
+    text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
 }
 
 .logoImg {
@@ -29,6 +35,11 @@
     text-decoration: none;
     display: inline-block;
     transition: color 0.3s ease, transform 0.3s ease;
+    text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
 }
 
 .navLinks a:hover {
@@ -52,6 +63,11 @@
     font-family: "Tagesschrift", system-ui;
     transition: .3s ease-in;
     animation: .5s ease-in;
+    text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
 }
 
 .logoutBtn:hover {
@@ -60,10 +76,12 @@
     border: 1px;
     border-radius: 30px;
     cursor: pointer;
+    text-shadow: none;
     /* background-color: #000;
     color: #EAE6DF;
     border: 1px;
     border-radius: 30px;
     cursor: pointer; */
+
 }
 
