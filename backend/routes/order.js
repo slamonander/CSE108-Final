@@ -2,6 +2,7 @@ import express from 'express';
 import Order from '../models/order.js';
 import User from '../models/user.js';
 import Product from '../models/product.js';
+import Cart from '../models/cart.js';
 import mongoose from 'mongoose';
 import {auth} from '../controllers/userController.js'
 

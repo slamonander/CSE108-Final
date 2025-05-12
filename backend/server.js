@@ -52,9 +52,6 @@ app.use(cors({
   credentials: true,
 }));
 
-
-app.options('*', cors()); // Handle preflight requests
-
    // To allow fetching requests
 app.use(express.json());
 
