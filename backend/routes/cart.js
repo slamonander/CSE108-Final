@@ -1,6 +1,7 @@
 import express from 'express';
 import Cart from '../models/cart.js';
 import {auth} from '../controllers/userController.js'
+import User from '../models/user.js';
 
 const router = express.Router();
 
@@ -81,6 +82,43 @@ router.delete('/:userId/items/:productId', auth, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.post('/:userId/purchase', auth, async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    //Find the cart
+    const cart = await Cart.findOne({ userId });
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).json({ message: 'Cart is empty.' });
+    }
+
+    //Find the user
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+
+    //Check if user has enough balance
+    if (user.balance < cart.total) {
+      return res.status(400).json({ message: 'Insufficient balance.' });
+    }
+
+    //Deduct balance
+    user.balance -= cart.total;
+    await user.save();
+
+    //Clear cart
+    cart.items = [];
+    cart.total = 0;
+    await cart.save();
+
+    res.status(200).json({
+      message: 'Purchase successful!',
+      balance: user.balance
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 

@@ -94,7 +94,34 @@ const Cart = () => {
             );
         }
     };
-//PURCHASE BUTTON IS NOT WIRED TO ANYTHING
+
+    const handlePurchase = async () => {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user?.id;
+      
+        if (!userId || !token) {
+          setError("You must be logged in to make a purchase.");
+          return;
+        }
+      
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${baseUrl}/api/cart/${userId}/purchase`,
+            {},
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setLoading(false);
+          setCart({ items: [], total: 0 }); // Clear cart on purchase
+          alert("Purchase successful! Thank you for shopping.");
+        } catch (err) {
+          setLoading(false);
+          setError(
+            err.response?.data?.message || "Purchase failed. Please try again."
+          );
+        }
+      };
     return (
       <div className="cart-container">
         <h2>Your Cart</h2>
@@ -115,7 +142,7 @@ const Cart = () => {
           <strong>Total:</strong> ${cart.total.toFixed(2)}
         </div>
         <div className="purchase-button-container">
-          <button className="purchase-button">Purchase</button>  
+          <button className="purchase-button"onClick={handlePurchase}>Purchase</button>  
        </div>
       </div>
     );

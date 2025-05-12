@@ -18,7 +18,7 @@
   }
   
   .productCard {
-    background-color: oldlace;
+    background-color: #fff;
     border: 1px solid #ccc;
     padding: 1rem;
     text-align: center;
@@ -48,9 +48,8 @@
   }
   
   .productCard button {
-    font-family: "Tagesschrift", system-ui;
     background-color: #007bff;
-    color: oldlace;
+    color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -62,7 +61,6 @@
   }
 
   .sortContainer {
-    font-family: "Tagesschrift", system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,7 +71,6 @@
   }
   
   .sortContainer select {
-    font-family: "Tagesschrift", system-ui;
     padding: 0.4rem 0.8rem;
     font-size: 1rem;
     border: 1px solid #ccc;
