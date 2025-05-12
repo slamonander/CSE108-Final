@@ -13,19 +13,19 @@ const ProductList = () => {
     const [error, setError] = useState('');
     const [sortOption, setSortOption] = useState('');
 
-    useEffect(() => {
-        // axios.get(`${baseUrl}/api/products/`)
-        axios.get(`${baseUrl}/api/product/`)
-            .then(response => {
-                setProducts(response.data.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error getting products:', error);
-                setError('Failed to load products');
-                setLoading(false);
-            });
-    }, []);
+useEffect(() => {
+    axios.get(`${baseUrl}/api/products/`)
+        .then(response => {
+            setProducts(response.data.data);
+            setLoading(false);
+        })
+        .catch(error => {
+            console.error('Error getting products:', error);
+            setError('Failed to load products');
+            setLoading(false);
+        });
+}, []);
+
 
     const handleCartChange = async (product) => {
         const token = localStorage.getItem("token");
