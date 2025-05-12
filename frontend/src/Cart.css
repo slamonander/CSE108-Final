@@ -3,6 +3,14 @@
     max-width: 800px;
     margin: 0 auto;
   }
+
+  .text {
+      text-shadow:
+      -1px -1px 0 oldlace,
+      1px -1px 0 oldlace,
+      -1px 1px 0 oldlace,
+      1px 1px 0 oldlace;
+  }
   
   .cart-items {
     list-style: none;

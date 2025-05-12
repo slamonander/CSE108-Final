@@ -6,6 +6,11 @@
   text-align: center;
   font-size: 1.3rem;
   animation: upDownFloat 3s ease-in-out infinite;
+  text-shadow:
+      -1px -1px 0 oldlace,
+      1px -1px 0 oldlace,
+      -1px 1px 0 oldlace,
+      1px 1px 0 oldlace;
 }
 
 a {
