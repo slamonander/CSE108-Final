@@ -31,12 +31,15 @@ a:visited{
   }
   
   .productCard {
+    display: flex;
     background-color: oldlace;
     border: 1px solid #ccc;
     padding: 1rem;
     text-align: center;
     border-radius: 8px;
     transition: transform 0.2s ease-in-out;
+    flex-direction: column;
+    height: 93%;
   }
   
   .productCard:hover {
@@ -48,7 +51,16 @@ a:visited{
     width: 100%;
     height: auto;
     margin-bottom: 0.5rem;
+    object-fit: contain;
+    max-height: 220px;
   }
+
+  .productCard-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
   
   .productCard h2 {
     font-size: 1.1rem;
@@ -68,6 +80,7 @@ a:visited{
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: auto;
   }
   
   .productCard button:hover {

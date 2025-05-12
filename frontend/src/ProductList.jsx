@@ -112,35 +112,44 @@ useEffect(() => {
         <div className="productGrid">
             {sortProducts(products, sortOption).map(product => (
                 <div className="productCard" key={product._id}>
+                <Link to={`/products/${product._id}`}>
+                    <img src={product.image} alt={product.name} />
+                </Link>
+
+                {/* Begin card body container */}
+                <div className="productCard-body">
                     <Link to={`/products/${product._id}`}>
-                        <img src={product.image} alt={product.name} />
-                        <h2>{product.name}</h2>
+                    <h2>{product.name}</h2>
                     </Link>
                     <p>{product.price}</p>
+
                     <Box sx={{ alignItems: 'center', mb: 0 }}>
-                        <Rating
-                            name={`product-rating-${product._id}`}
-                            value={product.ratingCount > 0 ? product.ratingTotal / product.ratingCount : 0}
-                            precision={0.5}
-                            readOnly
-                        />
+                    <Rating
+                        name={`product-rating-${product._id}`}
+                        value={product.ratingCount > 0 ? product.ratingTotal / product.ratingCount : 0}
+                        precision={0.5}
+                        readOnly
+                    />
                     </Box>
-                    <Box sx={{ ml: 0, mb:3 }}>
-                        {product.ratingCount > 0
+
+                    <Box sx={{ ml: 0, mb: 3 }}>
+                    {product.ratingCount > 0
                         ? `${(product.ratingTotal / product.ratingCount).toFixed(1)} (${product.ratingCount} review${product.ratingCount > 1 ? 's' : ''})`
                         : 'No ratings yet'}
                     </Box>
+
                     <button className="addButton" onClick={() =>
                     handleCartChange({
                         productId: product._id,
                         name: product.name,
                         quantity: 1,
                         price: product.price,
-                    })}>Add to Cart
-                    </button>
+                    })}>Add to Basket</button>
+                </div>
+                {/* End card body container */}
                 </div>
             ))}
-        </div>
+            </div>
         <Snackbar
             open={snackbarOpen}
             autoHideDuration={3000}
