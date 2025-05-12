@@ -192,7 +192,7 @@ export async function deleteCartItem(userId, productId, token) {
 /* --------------------- Dabloons --------------------- */
 
 export async function getDabloonsBalance(userId, token) {
-  const res = await fetch(`${apiBaseUrl}/api/user/dabloons/balance`, {
+  const res = await fetch(`${apiBaseUrl}/api/dabloons/balance`, {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`  // Use the Bearer token to authenticate
