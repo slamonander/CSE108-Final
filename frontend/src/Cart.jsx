@@ -109,6 +109,7 @@ const Cart = () => {
           setLoading(true);
           const res = await axios.post(
             `${baseUrl}/api/cart/${userId}/purchase`,
+            {},
             { headers: { Authorization: `Bearer ${token}` } }
           );
           setLoading(false);
