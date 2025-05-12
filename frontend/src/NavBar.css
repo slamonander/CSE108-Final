@@ -60,9 +60,14 @@
     border: 1px;
     border-radius: 30px;
     cursor: pointer;
-    /* background-color: #000;
-    color: #EAE6DF;
-    border: 1px;
-    border-radius: 30px;
-    cursor: pointer; */
+    text-shadow: none;
+    transform: translateY(-7px);
+}
+
+.balance {
+        text-shadow:
+        -1px -1px 0 oldlace,
+        1px -1px 0 oldlace,
+        -1px 1px 0 oldlace,
+        1px 1px 0 oldlace;
 }
