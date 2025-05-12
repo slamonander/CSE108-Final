@@ -94,7 +94,7 @@ const Cart = () => {
             );
         }
     };
-  
+//PURCHASE BUTTON IS NOT WIRED TO ANYTHING
     return (
       <div className="cart-container">
         <h2>Your Cart</h2>
@@ -114,6 +114,9 @@ const Cart = () => {
         <div className="cart-total">
           <strong>Total:</strong> ${cart.total.toFixed(2)}
         </div>
+        <div className="purchase-button-container">
+          <button className="purchase-button">Purchase</button>  
+       </div>
       </div>
     );
   };
